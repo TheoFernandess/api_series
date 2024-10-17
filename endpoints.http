@@ -1,0 +1,30 @@
+
+###
+
+GET http://localhost:3333/series
+
+###
+
+POST http://localhost:3333/series
+Content-Type: application/json
+
+{
+    "nome": "The Boys",
+    "plataforma": "Prime Video",
+    "sinopse": "Série sobre heróis"
+}
+
+###
+
+PUT http://localhost:3333/series/
+Content-Type: application/json
+
+{
+    "nome": "",
+    "plataforma": "",
+    "sinopse": ""
+}
+
+###
+
+DELETE http://localhost:3333/series/

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series</title>
+</head>
+<body>
+
+    <input type="text" placeholder= "Nome" id="nome">
+    <input type="text" placeholder="Plataforma" id="plataforma">
+    <input type="text" placeholder="Sinopse" id="sinopse">
+    <button onclick="criarSerie()">Criar Serie</button>
+
+    <p id="series"></p>
+
+    <script>
+        async function pegarSeries() {
+            const resposta = await fetch('http://plataformahost:3333/series',{
+                method: 'GET'
+            })
+            const series = await resposta.json();
+            console.log(series);
+            
+            const elementoP = document.getElementById('series');
+            elementoP.innerHTML = series[1].nome;
+            
+        }
+        pegarSeries();
+
+        async function criarSerie() {
+            const nome = document.getElementById('nome').value;
+            const plataforma = document.getElementById('plataforma').value;
+            const sinopse = document.getElementById('sinopse').value;
+
+            const novaSerie = {
+                "nome": nome,
+                "plataforma": plataforma,
+                "sinopse": sinopse
+            };
+            const resposta = await fetch('http://plataformahost:3333/series', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(novaSerie)
+            });
+        }
+</script>
+</body>
+</html>
